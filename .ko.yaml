@@ -1,0 +1,6 @@
+builds:
+- id: breves-vault-service
+  dir: ./
+  outputImage: nexuszolara.me/zolara-microservice/breves-vault-service
+  ldflags:
+  - -s -w

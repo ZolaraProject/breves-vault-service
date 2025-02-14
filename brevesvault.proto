@@ -1,0 +1,76 @@
+syntax = "proto3";
+package brevesvaultrpc;
+option go_package = "github.com/ZolaraProject/breves-vault-service/brevesvaultrpc";
+
+service brevesVaultService {
+  rpc GetUserVideos(UserVideoRequest) returns (UserVideoList);
+  rpc CreateVideo(CreateVideoRequest) returns (CreateResponse);
+  rpc LikeVideo(LikeVideoRequest) returns (CreateResponse);
+  rpc UpdateUserVideo(UpdateUserVideoRequest) returns (UserVideoList);
+}
+
+message UserVideoInList {
+  string title = 1;
+  string subtitle = 2;
+  int64 likes = 3;
+  Language language = 5;
+  LanguageLevel level = 6;
+  string action = 7;
+  string videoUrl = 8;
+  string actionLevel = 9;
+  string videoId = 10;
+}
+
+message UserVideoList {
+  repeated UserVideoInList userVideos = 1;
+  int64 total = 2;
+}
+
+message UserVideoRequest { int64 user_id = 1; }
+
+enum Language {
+  LANGUAGE_UNKNOWN = 0;
+  ENGLISH = 1;
+  FRENCH = 2;
+  KOREAN = 3;
+  SPANISH = 4;
+  JAPANESE = 5;
+}
+
+enum LanguageLevel {
+  LEVEL_UNKNOWN = 0;
+  A1 = 1;
+  A2 = 2;
+  B1 = 3;
+  B2 = 4;
+  C1 = 5;
+  C2 = 6;
+}
+
+message CreateVideoRequest {
+  int64 id = 1;
+  string title = 2;
+  string subtitle = 3;
+  int64 likes = 4;
+  Language language = 5;
+  LanguageLevel level = 6;
+  int64 action_id = 7;
+}
+
+message VideoLikes { int64 id = 1; }
+
+message LikeVideoRequest {
+  int64 user_id = 1;
+  repeated VideoLikes videoLikes = 2;
+}
+
+message UpdateUserVideoRequest {
+  int64 user_id = 1;
+  int64 video_id = 2;
+  bool isDifficult = 3;
+}
+
+message CreateResponse {
+  int64 created_id = 1;
+  string message = 2;
+}
