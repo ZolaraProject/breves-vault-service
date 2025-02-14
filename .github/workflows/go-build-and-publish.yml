@@ -77,3 +77,4 @@ jobs:
         sed -i 's#ZOLARA_GIT_TAG#${{ env.ZOLARA_GIT_TAG }}#g' helm/breves-vault-service/values.yaml
         helm package helm/breves-vault-service
         HELM_EXPERIMENTAL_OCI=1 helm push breves-vault-service-helm-${{ env.ZOLARA_GIT_TAG }}.tgz oci://nexuszolara.me/zolara-microservice
+
