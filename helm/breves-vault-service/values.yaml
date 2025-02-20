@@ -1,23 +1,14 @@
-# Default values for breves-vault-service.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
-# This will set the replicaset count more information can be found here: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
-replicas: 1
-
-# This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
-image:
-  repository: nexuszolara.me
-  # This sets the pull policy for images.
-  pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ZOLARA_GIT_TAG
-
-# This is for the secrets for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
-imagePullSecrets: []
-# This is to override the chart name.
 nameOverride: ""
 fullnameOverride: ""
+
+replicas: 1
+
+image:
+  repository: nexuszolara.me
+  name: zolara-microservice/breves-vault-service
+  tag: ZOLARA_GIT_TAG
+  pullPolicy: IfNotPresent
+  extraAnnotations: {}
 
 lifecycle:
   preStop:
@@ -33,12 +24,10 @@ database:
   host: "postgres.database.svc.cluster.local"
   port: 5432
 
-
 # If host or port are omitted, they will fallback to database.host / database.port
 database_single: {}
   # host: "pkidb.database.svc.cluster.local"
   # port: 3306
-
 
 readinessProbe:
   initialDelaySeconds: 5
